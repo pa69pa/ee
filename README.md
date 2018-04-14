@@ -8,3 +8,5 @@ goal: edit text, style, link with text and href on «one level» — without ale
 made as [jQuery](http://jquery.com) plugin
 
 see [example](https://pa69pa.github.io/ee/) with small instuction as use editor
+
+into source code of index.html see comment as embed editor
