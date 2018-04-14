@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="lib/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="lib/ee.css">
+<script src="lib/can.js"></script>
+<script src="lib/ee.js"></script>
+<style>
+form{
+ margin: 25px auto;
+ left: 0;
+ right: 0;
+ width: 60%;
+ border: 1px solid gray;
+ padding:5px;
+}
+</style>
+<script>
+$( document ).ready(function() {
+
+ console.log( "Eeeeasy Editor")
+
+// $('form').makeEE();
+// /*
+ var r = $('form').makeEE({
+	"Name:":null
+	,null:null
+	,"null1":{ 'min-height':'200px' }
+	,"butt+":[ 'add', function(){// context this = focused editor field
+		this.append("<b>2128506</b><br><a href='qwerty.html'>this is</a> my number")
+		return true
+	}]
+	,"butt=":[ 'RES', function(event){
+
+		$('form .ee-edit').each(function(){
+			console.log('======'+this.id+'=====');
+			console.log(this.innerHTML);
+		});
+
+		console.log('focused editor field',this);//context for callback function
+		console.log('range of selected text',this.data('rngEE'))
+		console.log('root block of EasyEditor',this.data('rootEE'));//here is $('form')
+		console.log('inside object of EasyEditor',this.data('rootEE').ee);
+		console.log('jQuery Event on mousedown',event);
+		return true
+	},{color:'navy'},{key:[48,"ctrlKey"]}] // keyCode of key "0"
+ });
+
+//console.log('EE =',r.ee)
+// */
+
+
+/**
+On .makeEE() one param is array of editor_fields and add_buttons.
+
+ for editor_fields:
+ {
+	"name": {css_array}
+	...
+ }
+
+ where "name: is label before editor_field
+ and css_array is anybody css options for editor_field:
+  { 'css':'value' [ , 'css':'value' ] }
+
+ if name begining with "null" — without label
+ if css_array = null — will be { 'min-height':'1em', '_height':'1em' }
+
+ makeEE() without array will make along one-line text field
+
+
+ another choise into array
+
+ {
+	"button": [button_array]
+	...
+ }
+
+ if name begining with "butt" then will make new button into menu
+
+ button_array can have minimum two elements for create easy-button
+
+   ["text_for_icon", function_on_click, css] 
+
+ if css is 'string' — then .addClass('string') else css is {...} — then add .css({...})
+
+ if you use «Material Icons» font, then stay css = 'mico' (it into ee.css)
+
+ if second element into button_array is function — this is easy-button,
+ if array with two function — this is toggle-button with functions on down and on up
+
+ for toggle-button full array:
+
+   [
+	 [ "text_for_icon", "text_for_icon_down" ]
+	,[ function_on_down, function_on_up ]
+	, css
+   ]
+
+ if only one icon, then just string "icon" instead of [ "icon", "icon_down" ]
+
+ as string "icon" m.b. '<img src="...">'
+
+ all function for easy or toggle buttons must return true/false on happy/not run
+
+ you can use fourth element of button_array = any object
+ wich will accessible through .data('fortEE')
+ ex. function on down/up on button:
+		function myFunc(e){
+			var e4 = $(e.target).data('fortEE');
+		}
+
+
+You can save root_block into var:
+
+	var r = $('form').makeEE();
+
+ and after add new button:
+*/
+//	r.ee.addButton( [ "888", function(){ alert('888') } ] )
+
+
+});
+</script>
+
+<form></form>
+
+
+<pre>
+into editor_field press Enter for new paragraph, press Ctrl+Enter for just &lt;br&gt;
+
+make selected text and:
+<i class='mico ee-button'>&#xE238;</i> or Ctrl+B for bold,
+<i class='mico ee-button'>&#xE23F;</i> or Ctrl+I for italic
+
+set caret on text and see on menu:
+button 'bold' will down on bold-text <i class='mico ee-button ee-toggle'>&#xE238;</i>,
+button 'italic' will down on italic-text <i class='mico ee-button ee-toggle'>&#xE23F;</i> —
+click\tap on button for clear style (without selected text)
+
+for create link select text and click button <i class='mico ee-button'>&#xE250;</i> or press Ctrl+L —
+selected text for create link will beacon —
+attribute 'href' will access for edit on status_line —
+button <i class='mico ee-button ee-seta' style='position:relative'>&#xE15F;</i> or when you focused on status_line Ctrl+Enter will set/change link attribute 'href'
+</pre>
